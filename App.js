@@ -6,6 +6,9 @@ import QuickInfo from "./pages/QuickInfo";
 import News from "./pages/News";
 import Announcements from "./pages/Announcements";
 import FastImages from "./components/FastImages";
+import Scanner from "./components/Scanner";
+import HomePage from "./pages/HomePage";
+
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +21,8 @@ export default function App() {
         <Drawer.Screen name="News" component={News} />
         <Drawer.Screen name="Announcements" component={Announcements} />
         <Drawer.Screen name="Images" component={FastImages} />
+        <Drawer.Screen name="QR" component={Scanner} />
+        <Drawer.Screen name="Live Streaming" component={HomePage} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

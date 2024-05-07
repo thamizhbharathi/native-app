@@ -1,11 +1,21 @@
 import { Image } from "expo-image";
-import React from "react";
-import { View, FlatList } from "react-native";
+import React, { useState } from "react";
+import { View, FlatList, Modal, TouchableOpacity, StyleSheet } from "react-native";
+import ImageViewer from "react-native-image-zoom-viewer";
 
 const FastImages = () => {
   const imageUris = [];
   const startingNumber = 400;
   const numberOfImages = 500; 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openImage = (uri) => {
+    setSelectedImage(uri);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   const blurhash =
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
@@ -18,13 +28,15 @@ const FastImages = () => {
   const renderItem = ({ item }) => {
     return (
       <View style={{ margin: 5 }}>
-        <Image
-          style={{ width: 80, height: 100 }}
-          source={{ uri: item }}
-          placeholder={blurhash}
-          contentFit="cover"
-          transition={1000}
-        />
+        <TouchableOpacity onPress={() => openImage(item)} style={{ margin: 5 }}>
+          <Image
+            style={{ width: 80, height: 100 }}
+            source={{ uri: item }}
+            placeholder={blurhash}
+            contentFit="cover"
+            transition={1000}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -37,8 +49,33 @@ const FastImages = () => {
         keyExtractor={(item, index) => index.toString()}
         numColumns={4}
       />
+      <Modal visible={selectedImage !== null} onRequestClose={closeModal}>
+        <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
+          
+          <Image
+            style={styles.modalImage}
+            source={{ uri: selectedImage }}
+            placeholder={blurhash}
+            contentFit="cover"
+          />
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+  },
+  modalImage: {
+    width: "80%",
+    height: "80%",
+    resizeMode: "contain",
+  },
+});
 
 export default FastImages;
