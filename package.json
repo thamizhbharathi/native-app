@@ -11,11 +11,9 @@
   "dependencies": {
     "@notifee/react-native": "^7.7.1",
     "@react-native-community/masked-view": "^0.1.11",
-    "@react-native-community/netinfo": "^11.3.1",
+    "@react-native-community/netinfo": "11.1.0",
     "@react-navigation/drawer": "^6.6.15",
     "@react-navigation/native": "^6.1.17",
-    "@stream-io/react-native-webrtc": "^118.0.1",
-    "@stream-io/video-react-native-sdk": "^0.6.17",
     "expo": "~50.0.17",
     "expo-barcode-scanner": "^12.9.3",
     "expo-battery": "^7.7.2",
